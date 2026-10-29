@@ -24,7 +24,7 @@
         body {
             background-color: #0a0b10;
             color: #ffffff;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         .glow-text {
             text-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
@@ -66,7 +66,7 @@
                 Bina Camera Ke Banayein <span class="bg-gradient-to-r from-neoncyan to-neonblue bg-clip-text text-transparent glow-text">Pro AI Videos</span> & Scripts!
             </h1>
             <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto px-2">
-                Google Veo, Midjourney, aur ChatGPT ke liye 1,000+ tested prompts ka sab se bara bundle. Apne TikTok, YouTube Shorts, aur Local Business videos ko agli satah par le jayein.
+                Google Veo, Midjourney, aur ChatGPT ke liye 1,000+ tested prompts ka sab se bara bundle. Apne TikTok, YouTube Shorts, aur Local Business videos ko mehtat ke bina viral karein.
             </p>
             <div class="pt-2">
                 <a href="#pricing" class="inline-block w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-base md:text-lg px-8 py-4 rounded-2xl shadow-xl glow-box hover:scale-105 transition">
@@ -142,29 +142,30 @@
             </button>
 
             <h3 class="text-lg md:text-xl font-bold mb-3">Complete Your Payment</h3>
-            <p class="text-xs text-gray-400 mb-5">Apni EasyPaisa se Rs. 499 is account par transfer karein aur neeche apni details submit karein:</p>
+            <p class="text-xs text-gray-400 mb-4">Apni EasyPaisa se Rs. 499 is account par transfer karein aur details submit karein:</p>
 
-            <div class="bg-darkbg p-4 rounded-xl border border-gray-800 mb-5 space-y-2 text-xs md:text-sm">
+            <div class="bg-darkbg p-4 rounded-xl border border-gray-800 mb-4 space-y-2 text-xs md:text-sm">
                 <div class="flex justify-between"><span>Account Holder Name:</span><span class="font-bold text-neoncyan">Haider Ali</span></div>
                 <div class="flex justify-between"><span>EasyPaisa Number:</span><span class="font-bold text-neoncyan">03350473732</span></div>
                 <div class="flex justify-between"><span>Amount:</span><span class="font-bold text-neoncyan">Rs. 499</span></div>
             </div>
 
-            <form onsubmit="handlePaymentSubmit(event)" class="space-y-3.5">
+            <form onsubmit="handlePaymentSubmit(event)" class="space-y-3">
                 <div>
                     <label class="block text-[11px] text-gray-400 mb-1">Your Name</label>
-                    <input type="text" required class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="Aap ka naam">
+                    <input type="text" id="custName" required class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="Aap ka naam">
                 </div>
                 <div>
                     <label class="block text-[11px] text-gray-400 mb-1">Your WhatsApp Number</label>
-                    <input type="tel" required class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="03XXXXXXXXX">
+                    <input type="tel" id="custPhone" required pattern="03[0-9]{9}" class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="03XXXXXXXXX">
                 </div>
                 <div>
-                    <label class="block text-[11px] text-gray-400 mb-1">Transaction ID / Trx ID</label>
-                    <input type="text" required class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="e.g. 382910XXXX">
+                    <label class="block text-[11px] text-gray-400 mb-1">Transaction ID / Trx ID (Min 10 Digits)</label>
+                    <input type="text" id="custTrx" required minlength="10" maxlength="15" pattern="[0-9]+" class="w-full bg-darkbg border border-gray-800 rounded-xl px-4 py-2.5 text-xs md:text-sm focus:outline-none focus:border-cyan-500" placeholder="e.g. 38291048291">
+                    <span id="trxError" class="text-red-500 text-[10px] hidden">TID 10 se 12 numbers ka hona zaroori hai!</span>
                 </div>
                 <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 rounded-xl shadow-lg mt-2 text-xs md:text-sm">
-                    Submit & Unlock Access
+                    Verify & Submit Payment
                 </button>
             </form>
         </div>
@@ -176,14 +177,18 @@
             <div class="w-14 h-14 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center text-green-400 text-xl mx-auto mb-3">
                 <i class="fa-solid fa-check"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Payment Submitted!</h3>
-            <p class="text-gray-400 text-xs md:text-sm mb-5">Payment receive hote hi Google Sheet ka link neeche wale button se open kar sakte hain:</p>
+            <h3 class="text-xl font-bold mb-2">Details Submitted!</h3>
+            <p class="text-gray-400 text-xs md:text-sm mb-5">Security verification ke liye neeche button par click karke WhatsApp par Trx ID confirm karein aur 1-click mein Google Sheet access payein:</p>
             
-            <a href="https://docs.google.com/spreadsheets/d/1tNnvY-RSq9W1P-_ARqfQmnNjpMOOxivmvMKesk9BaDk/edit" target="_blank" class="inline-block w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3 rounded-xl shadow-lg mb-3 text-xs md:text-sm">
-                <i class="fa-solid fa-table mr-2"></i> Open Google Sheet Access
+            <a id="waVerifyLink" href="#" target="_blank" class="inline-block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg mb-3 text-xs md:text-sm">
+                <i class="fa-brands fa-whatsapp mr-2 text-base"></i> Confirm on WhatsApp & Get Access
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1tNnvY-RSq9W1P-_ARqfQmnNjpMOOxivmvMKesk9BaDk/edit" target="_blank" class="inline-block w-full bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold py-2.5 rounded-xl text-xs mb-2">
+                Direct Google Sheet Link
             </a>
             
-            <button onclick="closeSuccess()" class="bg-gray-800 text-white font-bold px-6 py-2 rounded-xl text-xs">Close</button>
+            <button onclick="closeSuccess()" class="text-gray-500 hover:text-white font-medium text-xs mt-1">Close</button>
         </div>
     </div>
 
@@ -200,6 +205,25 @@
         }
         function handlePaymentSubmit(e) {
             e.preventDefault();
+            
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const trx = document.getElementById('custTrx').value.trim();
+
+            if (trx.length < 10) {
+                document.getElementById('trxError').classList.remove('hidden');
+                return;
+            } else {
+                document.getElementById('trxError').classList.add('hidden');
+            }
+
+            // WhatsApp link generator with prefilled message
+            const myNum = "923350473732";
+            const msg = `Salam! Main ne Rs.499 EasyPaisa send kiye hain.%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Trx ID:* ${trx}%0AMujhe Google Sheet Access Link bhej dein.`;
+            const waUrl = `https://wa.me/${myNum}?text=${msg}`;
+
+            document.getElementById('waVerifyLink').href = waUrl;
+
             closeCheckout();
             document.getElementById('successModal').classList.remove('hidden');
         }
